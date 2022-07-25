@@ -1,9 +1,11 @@
+import io.appium.java_client.AppiumBy;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 
 import java.net.URL;
 import java.time.Duration;
@@ -35,6 +37,7 @@ public class FirstTest {
     @Test
     public void firstTest()
     {
-        System.out.println("First test run");
+        driver.findElement(By.id("org.wikipedia:id/search_container")).click();
+        //System.out.println("First test run");
     }
 }
