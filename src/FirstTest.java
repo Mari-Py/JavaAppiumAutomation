@@ -6,6 +6,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.net.URL;
+import java.time.Duration;
 
 public class FirstTest {
     public AppiumDriver driver;
@@ -15,13 +16,14 @@ public class FirstTest {
     {
         UiAutomator2Options options = new UiAutomator2Options()
                 .setPlatformName("Android")
-                .setDeviceName("13081JECB06380")
+                .setDeviceName("7BKDU17609005457")
                 .setAppPackage("org.wikipedia")
                 .setAppActivity(".main.MainActivity")
-                .setApp("")
+                .setApp("C:/Users/beret/IdeaProjects/JavaAppiumAutomation/apks/org.wikipedia_50413_apps.evozi.com.apk")
                 .setNoReset(true);
 
         driver = new AndroidDriver(new URL("http://0.0.0.0:4723/wd/hub"), options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
     }
 
     @After
