@@ -54,7 +54,7 @@ public class FirstTest {
                 );
 
         waitForElementPresent(
-                By.xpath("//*resource_id='org.wikipedia:id/page_list_item_description']//*[@text='язык программирования']"),
+                By.xpath("(//*)[@text='Java'][1]"),
                 "Не нахожу Язык программирования в поиске Java",
                 15
                 );
@@ -69,17 +69,24 @@ public class FirstTest {
                 5
                 );
 
+        waitAndSendKeys(
+                By.id("org.wikipedia:id/search_src_text"),
+                "Java",
+                "Не могу ввести Java",
+                5
+                );
+
         waitAndClick(
                 By.id("org.wikipedia:id/search_close_btn"),
                 "Не могу найти Х, чтобы закрыть поиск",
                 5
-        );
+                );
 
         waitForElementNotPresent(
                 By.id("org.wikipedia:id/search_close_btn"),
-                "Х нет на странице",
+                "Х до сих пор присутствует на странице",
                 5
-        );
+                );
     }
 
     private WebElement waitForElementPresent(By by, String error_message, long timeout)
