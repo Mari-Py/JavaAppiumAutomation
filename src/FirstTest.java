@@ -2,6 +2,7 @@ import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.android.options.UiAutomator2Options;
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -61,7 +62,7 @@ public class FirstTest {
     }
 
     @Test
-    public void secondTest()
+    public void restCancelSearch()
     {
         waitAndClick(
                 By.id("org.wikipedia:id/search_container"),
@@ -87,6 +88,44 @@ public class FirstTest {
                 "Х до сих пор присутствует на странице",
                 5
                 );
+    }
+
+    @Test
+    public void testCompareArticleTitle()
+    {
+        waitAndClick(
+                By.id("org.wikipedia:id/search_container"),
+                "Не нахожу Поиск по Википедии",
+                5
+        );
+        waitAndSendKeys(
+                By.id("org.wikipedia:id/search_src_text"),
+                "Java",
+                "Не могу ввести Java",
+                5
+        );
+
+        waitAndClick(
+                By.xpath("(//*)[@text='Java'][2]"),
+                "Не могу найти Java",
+                5
+        );
+
+        WebElement title_element = waitForElementPresent(
+                //By.id("pcs-edit-section-title-description"),
+                By.xpath("(//*)[@text='язык программирования']"),
+                "Не нахожу название статьи",
+                10
+        );
+
+        String article_title = title_element.getText();
+
+        Assert.assertEquals(
+                "Мы видим не то название",
+                "язык программирования",
+                article_title
+        );
+
     }
 
     private WebElement waitForElementPresent(By by, String error_message, long timeout)
@@ -125,5 +164,13 @@ public class FirstTest {
                 ExpectedConditions.invisibilityOfElementLocated(by)
         );
     }
+
+/*    private WebElement waitAndClear(By by, String error_messege, long timeout) {
+        WebElement element = waitForElementPresent(By by, String error_messege, long timeout);
+        element.clear();
+        return element;
+        )
+    }*/
+
 
 }
